@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.adlos</groupId>
+		<artifactId>airx-backend</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+	<artifactId>restriction-service</artifactId>
+	<name>restriction-service</name>
+	<description>AIRX Flight Rule Restriction Service</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.adlos</groupId>
+			<artifactId>zone-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adlos</groupId>
+			<artifactId>airport-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adlos</groupId>
+			<artifactId>geofence-service</artifactId>
+		</dependency>
+	</dependencies>
+</project>

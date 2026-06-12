@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Temporary Emergency Flight Restriction Zone - Mumbai Coast", "type": "EMERGENCY_RED" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.78, 18.90], [72.82, 18.90], [72.82, 18.95], [72.78, 18.95], [72.78, 18.90]]]
+      }
+    }
+  ]
+}

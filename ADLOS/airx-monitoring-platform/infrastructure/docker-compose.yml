@@ -1,0 +1,136 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+
+  spark-master:
+    image: bde2020/spark-master:3.2.1-hadoop3.2
+
+  spark-worker:
+    image: bde2020/spark-worker:3.2.1-hadoop3.2
+    depends_on:
+      - spark-master
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+
+  postgis:
+    image: postgis/postgis:15-3.3
+    environment:
+      POSTGRES_USER: airx
+      POSTGRES_PASSWORD: airx
+      POSTGRES_DB: airx_spatial
+    volumes:
+      - ../gis/postgis/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.24.1
+    ports:
+      - "8085:8080"
+    depends_on:
+      - postgis
+
+  airflow-webserver:
+    image: apache/airflow:2.7.3
+    depends_on:
+      - postgres
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.3
+    depends_on:
+      - postgres
+
+  superset:
+    image: apache/superset:latest
+    depends_on:
+      - postgres
+
+  # AIRX Backend Modular Monolith API
+  backend-api:
+    build:
+      context: ../backend
+      dockerfile: backend-api/Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgis
+      - kafka
+
+  # AIRX Frontend Applications
+  airx-web:
+    build: ../frontend/airx-web
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend-api
+
+  airx-admin:
+    build: ../frontend/airx-admin
+    ports:
+      - "3002:80"
+    depends_on:
+      - backend-api
+
+  # AIRX Streaming Engines
+  kafka-producer:
+    build: ../streaming/kafka-producer
+    depends_on:
+      - kafka
+
+  kafka-consumer:
+    build: ../streaming/kafka-consumer
+    depends_on:
+      - kafka
+      - postgis
+
+  # Production Monitoring Stack
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - backend-api
+
+  loki:
+    image: grafana/loki:2.8.2
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:2.8.2
+    volumes:
+      - /var/log:/var/log
+      - ./monitoring/promtail/promtail-config.yaml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+
+  grafana:
+    image: grafana/grafana:9.5.2
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+      - loki

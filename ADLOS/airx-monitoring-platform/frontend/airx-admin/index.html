@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRX Flight Authorization Admin Portal</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="admin-header">
+        <div class="header-left">
+            <span class="brand-title">AIRX Monitoring Platform™</span>
+            <h1>Flight Authorization & Airspace Management Portal</h1>
+        </div>
+        <div class="user-profile">
+            <span class="badge blue-badge">CONTROL PANEL</span>
+            <span class="officer-name">ATC_SUPERVISOR_09</span>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <!-- Main Actions Area -->
+        <main class="admin-main">
+            <!-- Flight Permissions Section -->
+            <section class="admin-card">
+                <div class="card-header">
+                    <h2>PENDING FLIGHT AUTHORIZATION REQUESTS</h2>
+                    <button class="btn btn-secondary" onclick="loadPermissions()">Refresh List</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="gov-table">
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Drone ID</th>
+                                <th>Operator ID</th>
+                                <th>Flight Route (WKT)</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="permissions-tbody">
+                            <tr>
+                                <td colspan="6" class="text-center">Loading authorizations...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Active Violations Panel -->
+            <section class="admin-card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <h2>ONGOING AIRSPACE VIOLATION AUDITS</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="gov-table">
+                        <thead>
+                            <tr>
+                                <th>Violation ID</th>
+                                <th>Drone ID</th>
+                                <th>Operator ID</th>
+                                <th>Violation Type</th>
+                                <th>Timestamp</th>
+                                <th>Severity</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="violations-tbody">
+                            <tr>
+                                <td colspan="7" class="text-center">Loading audit log...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

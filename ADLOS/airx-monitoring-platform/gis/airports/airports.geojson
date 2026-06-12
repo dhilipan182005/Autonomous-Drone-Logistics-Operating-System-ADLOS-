@@ -1,0 +1,35 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Indira Gandhi International Airport", "icao": "VIDP", "iata": "DEL" },
+      "geometry": { "type": "Point", "coordinates": [77.1000, 28.5562] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Chhatrapati Shivaji Maharaj International Airport", "icao": "VABB", "iata": "BOM" },
+      "geometry": { "type": "Point", "coordinates": [72.8656, 19.0896] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Kempegowda International Airport", "icao": "VOBL", "iata": "BLR" },
+      "geometry": { "type": "Point", "coordinates": [77.7066, 13.1986] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Chennai International Airport", "icao": "VOMM", "iata": "MAA" },
+      "geometry": { "type": "Point", "coordinates": [80.1709, 12.9941] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Netaji Subhash Chandra Bose International Airport", "icao": "VECC", "iata": "CCU" },
+      "geometry": { "type": "Point", "coordinates": [88.4467, 22.6547] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Rajiv Gandhi International Airport", "icao": "VOHY", "iata": "HYD" },
+      "geometry": { "type": "Point", "coordinates": [78.4294, 17.2403] }
+    }
+  ]
+}

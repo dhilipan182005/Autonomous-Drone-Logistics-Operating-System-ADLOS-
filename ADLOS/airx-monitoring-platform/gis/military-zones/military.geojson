@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Jodhpur Air Force Base", "type": "MILITARY_RED" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.95, 26.22], [73.05, 26.22], [73.05, 26.30], [72.95, 26.30], [72.95, 26.22]]]
+      }
+    }
+  ]
+}

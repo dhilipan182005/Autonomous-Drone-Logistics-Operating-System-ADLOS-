@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Delhi National Capital Territory" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[76.80, 28.40], [77.30, 28.40], [77.30, 28.90], [76.80, 28.90], [76.80, 28.40]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Karnataka (Partial)" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.30, 12.50], [78.10, 12.50], [78.10, 13.30], [77.30, 13.30], [77.30, 12.50]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Maharashtra (Partial)" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.60, 18.70], [73.30, 18.70], [73.30, 19.50], [72.60, 19.50], [72.60, 18.70]]]
+      }
+    }
+  ]
+}

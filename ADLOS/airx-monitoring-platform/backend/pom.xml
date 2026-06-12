@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.0</version>
+		<relativePath/>
+	</parent>
+	<groupId>com.adlos</groupId>
+	<artifactId>airx-backend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>airx-backend</name>
+	<description>AIRX Airspace Intelligence System Parent POM</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<java.version>21</java.version>
+		<spring-kafka.version>3.1.1</spring-kafka.version>
+	</properties>
+
+	<modules>
+		<module>airspace-service/zone-service</module>
+		<module>airspace-service/airport-service</module>
+		<module>airspace-service/geofence-service</module>
+		<module>airspace-service/restriction-service</module>
+		<module>airspace-service/permission-service</module>
+		<module>violation-service</module>
+		<module>alert-service</module>
+		<module>backend-api</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Internal Modules -->
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>zone-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>airport-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>geofence-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>restriction-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>permission-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>violation-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.adlos</groupId>
+				<artifactId>alert-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Common Dependencies for All Modules -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

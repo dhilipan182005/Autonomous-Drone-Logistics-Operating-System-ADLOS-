@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "New Delhi District" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.16, 28.58], [77.24, 28.58], [77.24, 28.65], [77.16, 28.65], [77.16, 28.58]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Bengaluru Urban" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.50, 12.80], [77.75, 12.80], [77.75, 13.08], [77.50, 13.08], [77.50, 12.80]]]
+      }
+    }
+  ]
+}

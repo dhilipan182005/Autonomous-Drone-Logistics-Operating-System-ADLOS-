@@ -1,0 +1,351 @@
+/* AIRX Aviation-Grade Space Intelligence Theme */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #F8F9FA;
+    color: #1F2937;
+}
+
+/* Header Area - Aviation Blue */
+.airx-header {
+    background-color: #0B3D91;
+    color: #FFFFFF;
+    height: 55px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #E5E7EB;
+}
+
+.brand-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.brand-tagline {
+    font-size: 0.75rem;
+    color: #D1D5DB;
+    margin-left: 15px;
+    border-left: 1px solid #6B7280;
+    padding-left: 15px;
+}
+
+.system-status-indicator {
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
+
+.status-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10B981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* KPI Ribbon */
+.kpi-ribbon {
+    height: 50px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.kpi-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kpi-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #6B7280;
+    letter-spacing: 1px;
+}
+
+.kpi-val {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0B3D91;
+}
+
+.kpi-val.warning-val {
+    color: #F44336;
+}
+
+.kpi-divider {
+    width: 1px;
+    height: 25px;
+    background-color: #E5E7EB;
+    margin: 0 30px;
+}
+
+/* Map Container (70% SCREEN HEIGHT layout) */
+.map-container {
+    height: calc(70vh - 105px); /* Header + Ribbon height subtraction */
+    position: relative;
+    border-bottom: 2px solid #D1D5DB;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    background-color: #E5E7EB;
+}
+
+/* Overlays */
+.map-overlay {
+    position: absolute;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #D1D5DB;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.layer-control-panel {
+    top: 15px;
+    right: 15px;
+    width: 180px;
+    padding: 10px 12px;
+}
+
+.layer-control-panel h3 {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #0B3D91;
+    border-bottom: 1px solid #E5E7EB;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.layer-control-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.control-item {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #4B5563;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.coordinate-display {
+    bottom: 15px;
+    left: 15px;
+    padding: 4px 8px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #4B5563;
+}
+
+/* Bottom Data Grid (Remaining 30% SCREEN HEIGHT) */
+.bottom-dashboard-grid {
+    height: 30vh;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Ratio split */
+    background-color: #FFFFFF;
+}
+
+.dashboard-panel {
+    border-right: 1px solid #E5E7EB;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-header {
+    margin-bottom: 6px;
+}
+
+.panel-header h2 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #0B3D91;
+    letter-spacing: 0.5px;
+}
+
+.panel-subtitle {
+    font-size: 0.65rem;
+    color: #6B7280;
+    font-weight: 600;
+    margin-top: 1px;
+}
+
+.panel-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid #E5E7EB;
+}
+
+/* Split content for the alerts panel */
+.split-content {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    border: none;
+    overflow: hidden;
+}
+
+.alerts-log-container {
+    overflow-y: auto;
+    border: 1px solid #E5E7EB;
+}
+
+/* System Health Layout */
+.system-health-status {
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+}
+
+.health-item {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #F3F4F6;
+    padding-bottom: 4px;
+}
+
+.health-lbl {
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: #9CA3AF;
+}
+
+.health-indicator {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.dot-ok {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+    display: inline-block;
+}
+
+/* Data Tables styling */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #F9FAFB;
+    color: #4B5563;
+    font-weight: 700;
+    padding: 6px 8px;
+    border-bottom: 1px solid #E5E7EB;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.data-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #F3F4F6;
+    vertical-align: middle;
+}
+
+.data-table tr:hover {
+    background-color: #F9FAFB;
+}
+
+.no-data-row {
+    text-align: center;
+    color: #9CA3AF;
+    font-style: italic;
+}
+
+.no-data-row td {
+    padding: 20px 0;
+}
+
+/* Badges */
+.badge {
+    padding: 1px 4px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.badge-green { background-color: #E8F5E9; color: #4CAF50; border: 1px solid #4CAF50; }
+.badge-yellow { background-color: #FFFDE7; color: #F57F17; border: 1px solid #FFC107; }
+.badge-red { background-color: #FFEBEE; color: #D32F2F; border: 1px solid #F44336; }
+
+/* Status Classes for Rows */
+.row-info { border-left: 3px solid #0B3D91; }
+.row-warning { border-left: 3px solid #FFC107; background-color: #FFFDE7; }
+.row-critical { border-left: 3px solid #F44336; background-color: #FFEBEE; font-weight: 600; }
+.row-emergency { border-left: 3px solid #D32F2F; background-color: #FFEBEE; font-weight: 700; }
+
+/* Blinking animations for emergency */
+@keyframes blink-red {
+    0% { opacity: 1; filter: drop-shadow(0 0 1px #F44336); }
+    50% { opacity: 0.15; filter: drop-shadow(0 0 6px #F44336); }
+    100% { opacity: 1; filter: drop-shadow(0 0 1px #F44336); }
+}
+
+.marker-blink-red {
+    animation: blink-red 0.8s infinite;
+}
+
+.gov-popup {
+    font-size: 11px;
+}
+.gov-popup h3 {
+    margin-bottom: 4px;
+    color: #0B3D91;
+    font-size: 12px;
+}

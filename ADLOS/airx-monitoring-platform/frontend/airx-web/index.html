@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRX Monitoring Platform™ — Command Center</title>
+    <meta name="description" content="Real-Time Drone Airspace Intelligence & Flight Monitoring System">
+    <!-- Leaflet GIS library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="airx-header">
+        <div class="header-left">
+            <span class="brand-title">AIRX Monitoring Platform™</span>
+            <span class="brand-tagline">Real-Time Drone Airspace Intelligence &amp; Flight Monitoring</span>
+        </div>
+        <div class="header-right">
+            <div class="header-clock" id="header-clock">00:00:00 UTC</div>
+            <div class="system-status-indicator">
+                <span class="status-pulse-dot"></span> RADAR STREAM ONLINE
+            </div>
+        </div>
+    </header>
+
+    <!-- Top KPI Ribbon -->
+    <section class="kpi-ribbon">
+        <div class="kpi-item">
+            <span class="kpi-label">TOTAL DRONES REGISTERED</span>
+            <span class="kpi-val" id="kpi-total-drones">0</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+            <span class="kpi-label">ACTIVE IN AIRSPACE</span>
+            <span class="kpi-val kpi-active" id="kpi-active-drones">0</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+            <span class="kpi-label">ACTIVE ALERTS / WARNINGS</span>
+            <span class="kpi-val warning-val" id="kpi-alerts">0</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+            <span class="kpi-label">PLANNED MISSIONS</span>
+            <span class="kpi-val" id="kpi-missions">0</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+            <span class="kpi-label">AIRSPACE ZONES</span>
+            <span class="kpi-val" id="kpi-zones">0</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+            <span class="kpi-label">AIRPORTS MONITORED</span>
+            <span class="kpi-val" id="kpi-airports">0</span>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-item">
+            <span class="kpi-label">VIOLATIONS TODAY</span>
+            <span class="kpi-val violation-val" id="kpi-violations">0</span>
+        </div>
+    </section>
+
+    <!-- Main Live Airspace Map -->
+    <main class="map-container">
+        <!-- Layer Selector Overlay -->
+        <div class="map-overlay layer-control-panel">
+            <h3>MAP LAYERS</h3>
+            <div class="layer-control-list">
+                <label class="control-item">
+                    <input type="checkbox" id="layer-drones" checked>
+                    <span class="layer-dot" style="background:#0B3D91;"></span> Drones
+                </label>
+                <label class="control-item">
+                    <input type="checkbox" id="layer-airports" checked>
+                    <span class="layer-dot" style="background:#0B3D91;"></span> Airports
+                </label>
+                <label class="control-item">
+                    <input type="checkbox" id="layer-red-zones" checked>
+                    <span class="layer-dot" style="background:#F44336;"></span> Red Zones
+                </label>
+                <label class="control-item">
+                    <input type="checkbox" id="layer-yellow-zones" checked>
+                    <span class="layer-dot" style="background:#FFC107;"></span> Yellow Zones
+                </label>
+                <label class="control-item">
+                    <input type="checkbox" id="layer-green-zones" checked>
+                    <span class="layer-dot" style="background:#4CAF50;"></span> Green Zones
+                </label>
+                <label class="control-item">
+                    <input type="checkbox" id="layer-geofences" checked>
+                    <span class="layer-dot" style="background:#FF9800;"></span> Geofences
+                </label>
+                <label class="control-item">
+                    <input type="checkbox" id="layer-flight-paths" checked>
+                    <span class="layer-dot" style="background:#1565C0;border-style:dashed;"></span> Flight Paths
+                </label>
+            </div>
+        </div>
+
+        <!-- Zone Legend Overlay -->
+        <div class="map-overlay zone-legend-panel">
+            <h3>ZONE CLASSIFICATION</h3>
+            <div class="legend-item"><span class="legend-swatch" style="background:#F44336;"></span> RED — No Fly Zone</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#FFC107;"></span> YELLOW — Controlled Airspace</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#4CAF50;"></span> GREEN — Open Flight Zone</div>
+            <div class="legend-item"><span class="legend-swatch" style="background:#0B3D91;border-radius:50%;"></span> Airport + Safety Ring</div>
+        </div>
+        
+        <!-- Live coordinates display -->
+        <div class="map-overlay coordinate-display">
+            CURSOR: <span id="mouse-coords">0.00000, 0.00000</span> | ZOOM: <span id="zoom-level">5</span>
+        </div>
+
+        <div id="map"></div>
+    </main>
+
+    <!-- Bottom Data Workspace -->
+    <section class="bottom-dashboard-grid">
+        <!-- Left Panel: Active Flights -->
+        <div class="dashboard-panel panel-left">
+            <div class="panel-header">
+                <h2>ACTIVE FLIGHT INTELLIGENCE</h2>
+                <div class="panel-subtitle">Live Telemetry Streams &amp; Battery Health</div>
+            </div>
+            <div class="panel-content">
+                <table class="data-table active-flights-table">
+                    <thead>
+                        <tr>
+                            <th>Transponder</th>
+                            <th>Status</th>
+                            <th>Alt (ft)</th>
+                            <th>Speed</th>
+                            <th>Battery</th>
+                            <th>Signal</th>
+                            <th>Zone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="active-drones-tbody">
+                        <tr class="no-data-row">
+                            <td colspan="7">Awaiting telemetry streams…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Center Panel: Alerts + Violations -->
+        <div class="dashboard-panel panel-center">
+            <div class="panel-header">
+                <h2>REAL-TIME AIRSPACE ALERTS</h2>
+                <div class="panel-subtitle">Violation Auditing Log</div>
+            </div>
+            <div class="panel-content">
+                <table class="data-table alerts-log-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Severity</th>
+                            <th>Transponder</th>
+                            <th>Incident Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alerts-tbody">
+                        <tr class="no-data-row">
+                            <td colspan="4">No security alerts or boundary violations recorded.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Right Panel: System Status + Fleet Health -->
+        <div class="dashboard-panel panel-right">
+            <div class="panel-header">
+                <h2>SYSTEM &amp; FLEET HEALTH</h2>
+                <div class="panel-subtitle">Infrastructure Status &amp; Fleet Summary</div>
+            </div>
+            <div class="panel-content system-panel-content">
+                <!-- Container System Health Status -->
+                <div class="system-health-status">
+                    <div class="health-section-title">INFRASTRUCTURE</div>
+                    <div class="health-item">
+                        <span class="health-lbl">POSTGIS SPATIAL DB</span>
+                        <div class="health-indicator"><span class="dot-ok"></span> RUNNING</div>
+                    </div>
+                    <div class="health-item">
+                        <span class="health-lbl">KAFKA CLUSTER</span>
+                        <div class="health-indicator"><span class="dot-ok"></span> ONLINE</div>
+                    </div>
+                    <div class="health-item">
+                        <span class="health-lbl">VIOLATION DETECTOR</span>
+                        <div class="health-indicator"><span class="dot-ok"></span> ACTIVE</div>
+                    </div>
+                    <div class="health-item">
+                        <span class="health-lbl">PROMETHEUS ENGINE</span>
+                        <div class="health-indicator"><span class="dot-ok"></span> SCRAM</div>
+                    </div>
+                    <div class="health-item">
+                        <span class="health-lbl">GEOSERVER WMS</span>
+                        <div class="health-indicator"><span class="dot-ok"></span> ONLINE</div>
+                    </div>
+                </div>
+
+                <!-- Fleet Health -->
+                <div class="fleet-health-status">
+                    <div class="health-section-title">FLEET HEALTH</div>
+                    <div class="fleet-stat">
+                        <span class="fleet-stat-label">AVG BATTERY</span>
+                        <span class="fleet-stat-value" id="fleet-avg-battery">—</span>
+                    </div>
+                    <div class="fleet-stat">
+                        <span class="fleet-stat-label">LOW BATTERY (&lt;20%)</span>
+                        <span class="fleet-stat-value fleet-stat-warn" id="fleet-low-battery">0</span>
+                    </div>
+                    <div class="fleet-stat">
+                        <span class="fleet-stat-label">EMERGENCY</span>
+                        <span class="fleet-stat-value fleet-stat-danger" id="fleet-emergency">0</span>
+                    </div>
+                    <div class="fleet-stat">
+                        <span class="fleet-stat-label">IN ZONE VIOLATION</span>
+                        <span class="fleet-stat-value fleet-stat-danger" id="fleet-violations">0</span>
+                    </div>
+                    <div class="fleet-stat">
+                        <span class="fleet-stat-label">AVG ALTITUDE</span>
+                        <span class="fleet-stat-value" id="fleet-avg-alt">— ft</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaflet GIS library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

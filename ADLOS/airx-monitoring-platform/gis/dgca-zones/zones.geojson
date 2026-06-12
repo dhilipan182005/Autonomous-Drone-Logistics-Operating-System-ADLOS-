@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Delhi Central High Security Zone", "type": "RED", "limit": 0 },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.18, 28.60], [77.23, 28.60], [77.23, 28.64], [77.18, 28.64], [77.18, 28.60]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Jodhpur Border Restricted Zone", "type": "RED", "limit": 0 },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.95, 26.22], [73.05, 26.22], [73.05, 26.30], [72.95, 26.30], [72.95, 26.22]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Delhi Airport Buffer Controlled Airspace", "type": "YELLOW", "limit": 200 },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.00, 28.50], [77.20, 28.50], [77.20, 28.62], [77.00, 28.62], [77.00, 28.50]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Bengaluru Tech Corridor Open Zone", "type": "GREEN", "limit": 400 },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.60, 12.85], [77.85, 12.85], [77.85, 13.05], [77.60, 13.05], [77.60, 12.85]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Mumbai Outer Green Zone", "type": "GREEN", "limit": 400 },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.90, 19.10], [73.15, 19.10], [73.15, 19.35], [72.90, 19.35], [72.90, 19.10]]]
+      }
+    }
+  ]
+}
