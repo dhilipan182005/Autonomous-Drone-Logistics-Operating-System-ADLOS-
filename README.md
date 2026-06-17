@@ -1,300 +1,327 @@
-# Autonomous Drone Logistics Operating System
+AIRX Monitoring Platform™
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge\&logo=fastapi\&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge\&logo=postgresql\&logoColor=white)
-![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge\&logo=apachespark\&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge\&logo=docker\&logoColor=white)
+Real-Time Drone Airspace Intelligence & Flight Monitoring Platform
 
-## Overview
-
-Autonomous Drone Logistics Operating System (ADLOS) is a fleet management and autonomous delivery platform designed for medical logistics, emergency response, warehouse operations, and autonomous drone transportation.
-
-The platform combines intelligent mission planning, real-time telemetry, charging station automation, fleet monitoring, predictive maintenance, and secure package delivery into a single operational ecosystem.
-
-The system is designed around transparency, reliability, scalability, and operational safety.
+"Java" (https://img.shields.io/badge/Java-21-orange?style=for-the-badge)
+"Spring Boot" (https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+"PostgreSQL" (https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+"Firebase" (https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+"OpenStreetMap" (https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white)
+"Render" (https://img.shields.io/badge/Render-46E3B7?style=for-the-badge)
 
 ---
 
-## Key Capabilities
+Overview
 
-* Autonomous Mission Planning
-* Real-Time Fleet Monitoring
-* Intelligent Drone Assignment
-* Charging Station Management
-* Battery-Aware Route Planning
-* Emergency Response Delivery
-* OTP Secured Package Release
-* Customer Tracking
-* Offline AI Diagnostics
-* Predictive Maintenance
-* Fleet Analytics
-* Realtime Operations Dashboard
+AIRX Monitoring Platform is a real-time drone airspace intelligence and flight monitoring system designed for commercial drone operators, logistics providers, survey teams, emergency response organizations, and autonomous fleet operators.
+
+The platform provides live drone tracking, airspace awareness, geo-fencing, airport proximity monitoring, mission visibility, operational alerts, and fleet intelligence through an interactive aviation-grade monitoring dashboard.
+
+AIRX focuses on operational safety, airspace awareness, flight visibility, and real-time situational intelligence.
 
 ---
 
-## System Architecture
+Core Capabilities
 
-```mermaid
+* Real-Time Drone Tracking
+* Live Airspace Visualization
+* Green Zone Monitoring
+* Yellow Zone Monitoring
+* Red Zone Restriction Detection
+* Airport Safety Radius Monitoring
+* Geo-Fencing Enforcement
+* Fleet Monitoring
+* Flight Path Visualization
+* Mission Monitoring
+* Alert Management
+* Battery Monitoring
+* Signal Quality Monitoring
+* Flight History Tracking
+* Airspace Intelligence Analytics
+* Aviation Operations Dashboard
+
+---
+
+Airspace Intelligence Architecture
+
 graph TD
 
-    subgraph Drone Network
-        A[Drone Fleet]
-        B[Charging Stations]
-        C[Mission Planner]
-    end
+A[Drone Fleet]
+--> B[Telemetry Engine]
 
-    A --> D[MQTT Gateway]
-    B --> D
-    C --> D
+B --> C[Spring Boot API]
 
-    subgraph Core Platform
-        D --> E[API Gateway]
-        E --> F[Fleet Service]
-        E --> G[Mission Service]
-        E --> H[Charging Service]
-        E --> I[Customer Service]
-    end
+C --> D[(PostgreSQL)]
 
-    subgraph Data Layer
-        F --> J[(PostgreSQL)]
-        F --> K[(TimescaleDB)]
-        G --> J
-        H --> J
-        I --> J
-    end
+D --> E[Airspace Intelligence Engine]
 
-    subgraph Analytics Layer
-        K --> L[Apache Spark]
-        L --> M[Analytics Engine]
-        M --> N[Offline AI Engine]
-    end
+E --> F[GeoFence Engine]
 
-    subgraph Client Applications
-        O[Operations Center]
-        P[Android Application]
-        Q[Customer Portal]
-        R[Maintenance Dashboard]
-    end
+F --> G[Alert Engine]
 
-    E --> O
-    E --> P
-    E --> Q
-    E --> R
-```
+G --> H[AIRX Dashboard]
+
+H --> I[OpenStreetMap]
 
 ---
 
-## Delivery Workflow
+Airspace Zone Classification
 
-```mermaid
-flowchart LR
+Green Zone
 
-    A[Customer Order]
-    --> B[Order Validation]
+Safe operational area.
 
-    B --> C[Mission Planning]
+Flight operations allowed.
 
-    C --> D[Battery Analysis]
-
-    D --> E[Drone Selection]
-
-    E --> F[Mission Assignment]
-
-    F --> G[Autonomous Flight]
-
-    G --> H[OTP Verification]
-
-    H --> I[Delivery Confirmation]
-
-    I --> J[Charging Station Routing]
-
-    J --> K[Mission Complete]
-```
+Maximum recommended altitude:
+400 ft
 
 ---
 
-## Drone Hardware Architecture
+Yellow Zone
 
-```mermaid
+Caution area.
+
+Additional operational checks required.
+
+Airport proximity monitoring enabled.
+
+Altitude restrictions may apply.
+
+---
+
+Red Zone
+
+Restricted area.
+
+Flight operations not recommended.
+
+Continuous monitoring and alert generation enabled.
+
+---
+
+Airport Safety Monitoring
+
+AIRX continuously evaluates drone distance from airports and controlled airspace.
+
+Monitoring Layers:
+
+* Airport Boundary
+* Airport Safety Radius
+* Flight Restriction Areas
+* Airport Proximity Alerts
+* Route Risk Analysis
+
+---
+
+Drone Hardware Architecture
+
 graph TD
 
-    A[GPS / RTK GPS]
-    B[Battery Monitoring]
-    C[Temperature Sensors]
-    D[IMU]
-    E[LTE Module]
-    F[LoRa Module]
+A[GPS Module]
+B[IMU Sensor]
+C[Compass]
+D[Battery Monitor]
+E[Telemetry Radio]
+F[LTE Module]
+G[Camera Payload]
 
-    A --> G[ESP32 Companion Controller]
-    B --> G
-    C --> G
-    D --> G
-    E --> G
-    F --> G
+A --> H[Flight Controller]
+B --> H
+C --> H
+D --> H
+E --> H
+F --> H
+G --> H
 
-    G --> H[Pixhawk Flight Controller]
+H --> I[Telemetry Processor]
 
-    H --> I[ESC]
-    I --> J[Motors]
-```
-
----
-
-## Charging Station Architecture
-
-```mermaid
-graph TD
-
-    A[Charging Dock]
-    B[Power Controller]
-    C[Temperature Sensor]
-    D[Station Controller ESP32]
-    E[LTE / Ethernet]
-
-    A --> D
-    B --> D
-    C --> D
-    E --> D
-
-    D --> F[Cloud Platform]
-```
+I --> J[AIRX Platform]
 
 ---
 
-## Technology Stack
+Drone Telemetry
 
-### Backend
+AIRX collects:
 
-* Python
-* FastAPI
-* MQTT
+* Latitude
+* Longitude
+* Altitude
+* Speed
+* Heading
+* Battery Percentage
+* Battery Temperature
+* Signal Strength
+* Mission Status
+* GPS Accuracy
+* Flight Duration
+* Distance Travelled
+
+Every dashboard value originates from recorded telemetry.
+
+No estimated values are displayed.
+
+---
+
+GeoFence Monitoring
+
+AIRX continuously monitors:
+
+* Flight Boundaries
+* Restricted Areas
+* Mission Zones
+* Airport Zones
+* Emergency Zones
+
+Alerts generated for:
+
+* Zone Entry
+* Zone Exit
+* Route Deviation
+* Airport Proximity
+* Restricted Area Violation
+
+---
+
+Flight Monitoring Dashboard
+
+The dashboard provides:
+
+* Live Drone Locations
+* Flight Paths
+* Fleet Status
+* Alert Feed
+* Mission Status
+* Airspace Zones
+* Battery Status
+* Signal Health
+* Airspace Analytics
+
+The map serves as the primary operational interface.
+
+---
+
+Operational Dashboard Layout
+
+AIRX Monitoring Platform
+
+┌──────────────────────────────────────┐
+│ Fleet │ Missions │ Airspace │ Alerts │
+├──────────────────────────────────────┤
+│                                      │
+│                                      │
+│        LIVE AIRSPACE MAP             │
+│                                      │
+│                                      │
+├─────────────┬─────────────┬──────────┤
+│ Fleet       │ Alerts      │ Health   │
+└─────────────┴─────────────┴──────────┘
+
+---
+
+Technology Stack
+
+Frontend
+
+* React
+* TypeScript
+* Material UI
+* Leaflet
+* OpenStreetMap
+
+Backend
+
+* Spring Boot
+* Java 21
+* REST API
 * WebSocket
-* Redis
 
-### Databases
+Database
 
 * PostgreSQL
-* TimescaleDB
+* Supabase
 
-### Analytics
+Authentication
 
-* Apache Spark
-* PySpark
-* Apache Airflow
-
-### Monitoring
-
-* Prometheus
-* Grafana
-
-### Authentication
-
-* Google OAuth
+* Firebase Authentication
 * JWT
-* MFA
 
-### Infrastructure
+Hosting
 
-* Docker
-* Docker Compose
-
-### Embedded Systems
-
-* ESP32
-* ESP-IDF
-* ArduPilot
+* Firebase Hosting
+* Render
 
 ---
 
-## Security Model
+Security
 
-The platform follows a Zero Trust Architecture.
-
-Every component is authenticated and verified.
+AIRX follows a Zero Trust operational model.
 
 Security features include:
 
-* Device Authentication
-* Hardware Identity Validation
-* TLS Encryption
-* JWT Authentication
-* Role Based Access Control
-* OTP Package Verification
+* Firebase Authentication
+* JWT Validation
+* Role-Based Access Control
+* HTTPS Encryption
 * Audit Logging
-* Mission Authorization
-* Secure Telemetry Channels
+* API Validation
+* Secure Session Management
 
 ---
 
-## Real-Time Monitoring
+Real-Time Monitoring
 
-The Operations Center provides live visibility into:
+AIRX provides live visibility into:
 
-* Drone Status
+* Active Drones
+* Airspace Activity
 * Mission Status
-* Charging Stations
 * Battery Levels
 * Signal Quality
-* Hardware Health
-* Fleet Utilization
-* System Health
+* Airport Proximity
+* Zone Violations
+* Operational Alerts
 
-Status values are never estimated.
-
-Every value displayed originates from:
-
-* Telemetry
-* Database Records
-* Verified Service Responses
+All displayed information originates from stored telemetry and verified records.
 
 ---
 
-## Scalability Goals
+Project Structure
 
-Designed for:
+airx-monitoring-platform/
 
-* 10,000+ Drones
-* 5,000+ Charging Stations
-* Multi-Region Operations
-* Millions of Daily Telemetry Events
-* High Availability Deployments
-
----
-
-## Project Structure
-
-```text
-adlos/
-
-├── mobile/
 ├── backend/
-├── firmware/
-├── analytics/
-├── airflow/
+├── frontend/
+│   ├── airx-web/
+│   └── airx-admin/
+├── database/
+├── gis/
 ├── infrastructure/
-├── monitoring/
-├── databases/
+├── scripts/
+├── streaming/
+├── testing/
 ├── docs/
-├── tests/
-└── deployment/
-```
+└── airflow/
 
 ---
 
-## Future Roadmap
+Future Roadmap
 
-* Autonomous Battery Swapping
-* Dynamic Weather Routing
-* Multi-Drone Coordination
-* Smart Warehouse Integration
-* Emergency Dispatch Automation
-* AI Assisted Fleet Optimization
-* Regional Drone Traffic Management
+* Autonomous Mission Planning
+* AI-Assisted Flight Risk Detection
+* Advanced Airspace Analytics
+* Multi-Fleet Operations
+* Satellite Tracking Integration
+* Weather Intelligence Layer
+* Predictive Maintenance
+* Remote Fleet Operations Center
 
 ---
 
-## License
+License
+
+AIRX Monitoring Platform™
 
 Internal Development Project
-All operational decisions must be validated through telemetry, mission safety rules, and system health verification.
+
+All flight operations, monitoring decisions, and airspace intelligence outputs must be validated through telemetry, operational rules, and verified data sources.
