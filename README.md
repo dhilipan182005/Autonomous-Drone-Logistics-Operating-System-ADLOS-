@@ -7,7 +7,15 @@
 ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ---
+## Live Demo
 
+🌐 **AIRX Monitoring Platform**
+
+**Web Dashboard:** https://airx-monitoring.web.app
+
+**System Status:** Online
+
+---
 AIRX Monitoring Platform
 
 AIRX Monitoring Platform is a real-time drone airspace intelligence and fleet monitoring system designed for autonomous drones, commercial drone operators, agriculture services, survey missions, infrastructure inspection, logistics operations, and emergency response activities.
