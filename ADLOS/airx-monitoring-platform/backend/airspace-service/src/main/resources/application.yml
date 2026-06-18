@@ -1,0 +1,23 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: airspace-service
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/airx
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  jpa:
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false

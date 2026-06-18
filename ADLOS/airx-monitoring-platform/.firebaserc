@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "adlos-drone"
+  },
+  "targets": {
+    "adlos-drone": {
+      "hosting": {
+        "authority-portal": [
+          "adlos-drone-authority"
+        ],
+        "owner-portal": [
+          "adlos-drone-owner"
+        ]
+      }
+    }
+  }
+}

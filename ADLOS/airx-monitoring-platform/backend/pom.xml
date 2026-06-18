@@ -21,14 +21,12 @@
 	</properties>
 
 	<modules>
-		<module>airspace-service/zone-service</module>
-		<module>airspace-service/airport-service</module>
-		<module>airspace-service/geofence-service</module>
-		<module>airspace-service/restriction-service</module>
-		<module>airspace-service/permission-service</module>
-		<module>violation-service</module>
+		<module>auth-service</module>
+		<module>drone-service</module>
+		<module>telemetry-service</module>
+		<module>airspace-service</module>
 		<module>alert-service</module>
-		<module>backend-api</module>
+		<module>analytics-service</module>
 	</modules>
 
 	<dependencyManagement>
@@ -79,9 +77,25 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<!-- Hibernate Spatial for PostGIS integration -->
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+		</dependency>
+		<!-- PostgreSQL Driver -->
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

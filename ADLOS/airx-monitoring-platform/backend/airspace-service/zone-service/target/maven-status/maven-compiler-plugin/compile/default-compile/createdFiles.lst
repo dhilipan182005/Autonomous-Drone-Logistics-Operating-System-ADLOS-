@@ -1,0 +1,3 @@
+com\adlos\airspace\zone\AirspaceZone.class
+com\adlos\airspace\zone\ZoneService.class
+com\adlos\airspace\zone\AirspaceZoneRepository.class

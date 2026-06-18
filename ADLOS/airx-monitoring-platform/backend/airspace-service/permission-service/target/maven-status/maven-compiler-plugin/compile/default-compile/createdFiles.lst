@@ -1,0 +1,4 @@
+com\adlos\airspace\permission\FlightPermission.class
+com\adlos\airspace\permission\PermissionController.class
+com\adlos\airspace\permission\FlightPermissionRepository.class
+com\adlos\airspace\permission\PermissionService.class

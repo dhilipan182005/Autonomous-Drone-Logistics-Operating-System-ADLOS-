@@ -1,0 +1,26 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Flight logs (JSON)
+    match /flight_logs/{droneId}/{fileName} {
+      // Allow read/write if authenticated and is JSON
+      allow read: if request.auth != null;
+      allow write: if request.auth != null 
+                   && fileName.matches('.*\\.json');
+    }
+
+    // Camera captures from ESP32 (JPG)
+    match /camera_captures/{droneId}/{fileName} {
+      // Allow read/write if authenticated and is an image
+      allow read: if request.auth != null;
+      allow write: if request.auth != null 
+                   && request.resource.contentType.matches('image/.*');
+    }
+    
+    // Default fallback: deny all
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
