@@ -9,17 +9,6 @@
 ![Pixhawk](https://img.shields.io/badge/Hardware-Pixhawk-blue?style=for-the-badge)
 ![ESP32](https://img.shields.io/badge/Edge_AI-ESP32-red?style=for-the-badge)
 
----
-
-## Live Demo
-
-**AIRX Monitoring Platform**
-
-**Web Dashboard:** https://airx-monitoring.web.app
-
-**System Status:** Online
-
----
 
 ## Introduction
 
