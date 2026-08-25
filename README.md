@@ -1,13 +1,14 @@
 # AIRX Monitoring Platform
 
+![Pixhawk](https://img.shields.io/badge/Hardware-Pixhawk-blue?style=for-the-badge)
+![ESP32](https://img.shields.io/badge/Edge_AI-ESP32-red?style=for-the-badge)
 ![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Pixhawk](https://img.shields.io/badge/Hardware-Pixhawk-blue?style=for-the-badge)
-![ESP32](https://img.shields.io/badge/Edge_AI-ESP32-red?style=for-the-badge)
+
 
 
 ## Introduction
